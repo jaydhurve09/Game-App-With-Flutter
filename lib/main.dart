@@ -20,7 +20,10 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.white),
           bodyLarge: TextStyle(color: Colors.white),
           titleMedium: TextStyle(color: Colors.white),
-          titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          titleLarge: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       home: HomePage(),
@@ -96,9 +99,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           title: SizedBox(
-            height: 40,
+            height: 50,
             child: Image.asset(
-              'assets/logo.jpg',
+              'assets/logo.png',
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) {
                 // Fallback if logo doesn't load
@@ -221,13 +224,6 @@ class _HomePageState extends State<HomePage> {
                         width: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              blurRadius: 10,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
@@ -261,13 +257,6 @@ class _HomePageState extends State<HomePage> {
                                       fontSize: 32,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                      shadows: [
-                                        Shadow(
-                                          color: Colors.black.withOpacity(0.8),
-                                          offset: Offset(2, 2),
-                                          blurRadius: 4,
-                                        ),
-                                      ],
                                     ),
                                   ),
                                 ),
