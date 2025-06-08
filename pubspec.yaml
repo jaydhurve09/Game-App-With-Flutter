@@ -60,5 +60,16 @@ flutter:
   assets:
     - assets/
     - assets/logo.png
-    # - assets/logo.png
+    - assets/blue-star.png
+    - assets/yellow-star.png
+    - assets/orange-star.png
+    - assets/trophy.png
     - assets/rummy.png
+    - assets/call-break.png
+    - assets/maze.png
+    - assets/snake-and-ladder.png
+    - assets/blade-runner.png
+    - assets/temple-run.png
+    - assets/poker.png
+    - assets/ludo.png
+    - assets/carrom.png

@@ -43,15 +43,15 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final List<GameItem> trendingGames = [
-    GameItem('CALL BREAK', 'assets/callbreak.png', Colors.green),
+    GameItem('CALL BREAK', 'assets/call-break.png', Colors.green),
     GameItem('RUMMY', 'assets/rummy.png', Colors.orange),
     GameItem('MAZE RUSH', 'assets/maze.png', Colors.blue),
   ];
 
   final List<GameItem> snakesLadders = [
-    GameItem('SNAKES & LADDERS', 'assets/snakes.png', Colors.red),
-    GameItem('BLADES RUNNER', 'assets/blades.png', Colors.purple),
-    GameItem('TEMPLE RUN', 'assets/temple.png', Colors.orange),
+    GameItem('SNAKES & LADDERS', 'assets/snake-and-ladder.png', Colors.red),
+    GameItem('BLADES RUNNER', 'assets/blade-runner.png', Colors.purple),
+    GameItem('TEMPLE RUN', 'assets/temple-run.png', Colors.orange),
   ];
 
   final List<GameItem> popularGames = [
@@ -103,6 +103,8 @@ class _HomePageState extends State<HomePage> {
             child: Image.asset(
               'assets/logo.png',
               fit: BoxFit.contain,
+              width: 100, // Add explicit width
+              height: 50, // Match the SizedBox height
               errorBuilder: (context, error, stackTrace) {
                 // Fallback if logo doesn't load
                 return Row(
@@ -294,7 +296,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 24),
 
               // Snakes & Ladders Section
-              _buildSectionHeader('🐍 SNAKES & LADDERS', Icons.gamepad),
+              _buildSectionHeader('🐍 MULTIPLAYER GAMES', Icons.gamepad),
               SizedBox(height: 12),
               _buildGameGrid(snakesLadders),
 
@@ -508,46 +510,41 @@ class _HomePageState extends State<HomePage> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: FutureBuilder<bool>(
-            future: _checkImageExists(game.imagePath),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data == true) {
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Image.asset(
-                      game.imagePath,
-                      width: constraints.maxWidth,
-                      height: constraints.maxHeight,
-                      fit: BoxFit.fill,
-                    );
-                  },
-                );
-              } else {
-                return Container(
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        _getGameIcon(game.name),
-                        color: game.color,
-                        size: 32,
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        game.name,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
+          child: Stack(
+            children: [
+              Image.asset(
+                game.imagePath,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  print('Error loading image ${game.imagePath}: $error');
+                  return Container(
+                    padding: EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          _getGameIcon(game.name),
+                          color: game.color,
+                          size: 32,
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            },
+                        SizedBox(height: 8),
+                        Text(
+                          game.name,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
