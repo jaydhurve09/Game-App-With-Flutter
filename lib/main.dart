@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:math';
 
 void main() {
   runApp(MyApp());
@@ -74,381 +75,396 @@ class _HomePageState extends State<HomePage> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF0A1A35), // Dark blue
-            Color(0xFF0F2A4A), // Medium dark blue
-            Color(0xFF0A1A35), // Dark blue
+            Color(0xFF1565C0), // Light Blue
+            Color(0xFF0D47A1), // Medium Blue
+            Color(0xFF0A2472), // Deep Blue
           ],
           stops: [0.0, 0.5, 1.0],
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF0A1A35), // Dark blue
-                  Color(0xFF0F2A4A), // Medium dark blue
-                ],
+      child: Stack(
+        children: [
+          // Decorative stars background
+          Positioned.fill(
+            child: RepaintBoundary(
+              child: CustomPaint(
+                painter: StarBackgroundPainter(
+                  starColor: Color(0xFF64B5F6).withOpacity(0.05), // Light blue stars
+                ),
               ),
             ),
           ),
-          title: SizedBox(
-            height: 50,
-            child: Image.asset(
-              'assets/logo.png',
-              fit: BoxFit.contain,
-              width: 100, // Add explicit width
-              height: 50, // Match the SizedBox height
-              errorBuilder: (context, error, stackTrace) {
-                // Fallback if logo doesn't load
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.all(8),
-                      child: Icon(Icons.gamepad, color: Colors.black, size: 20),
-                    ),
-                    Text(
-                      'GAME',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          centerTitle: false,
-          actions: [
-            Container(
-              margin: EdgeInsets.only(right: 8),
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: Color(0xFF4A3B5C),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.account_balance_wallet,
-                    color: Colors.amber,
-                    size: 16,
-                  ),
-                  SizedBox(width: 4),
-                  Text(
-                    '₹28.71',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Stack(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.notifications, color: Colors.white),
-                  onPressed: () {},
-                ),
-                Positioned(
-                  right: 8,
-                  top: 8,
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: Colors.amber,
-              child: Icon(Icons.person, color: Colors.black, size: 20),
-            ),
-            SizedBox(width: 16),
-          ],
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // GAME Logo Section
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 24),
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF00FFFF), // Cyan (neon)
-                        Color(0xFF00BFFF), // Deep sky blue
-                        Color(0xFF1E90FF), // Dodger blue
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xFF00BFFF).withOpacity(0.6),
-                        blurRadius: 15,
-                        offset: Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      // Logo Image
-                      Container(
-                        height: 120,
-                        width: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            'assets/logo.png', // Replace with your logo file name
-                            fit: BoxFit.contain,
-                            errorBuilder: (context, error, stackTrace) {
-                              // Fallback if image doesn't load
-                              return Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.cyan,
-                                      Colors.amber,
-                                      Colors.pink,
-                                      Colors.cyan,
-                                    ],
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 3,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'FUL2WIN',
-                                    style: TextStyle(
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 12),
-                      // Stars decoration
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          5,
-                          (index) => Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 2),
-                            child: Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                              size: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              // Trending Section
-              _buildSectionHeader('🔥 TRENDING', Icons.trending_up),
-              SizedBox(height: 12),
-              _buildGameGrid(trendingGames),
-
-              SizedBox(height: 24),
-
-              // Snakes & Ladders Section
-              _buildSectionHeader('🐍 MULTIPLAYER GAMES', Icons.gamepad),
-              SizedBox(height: 12),
-              _buildGameGrid(snakesLadders),
-
-              SizedBox(height: 24),
-
-              // Popular Section
-              _buildSectionHeader('⭐ POPULAR GAMES', Icons.star),
-              SizedBox(height: 12),
-              _buildGameGrid(popularGames),
-
-              SizedBox(height: 24),
-
-              // Promotion Banner
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(16),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              flexibleSpace: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF00FFFF), // Cyan
-                      Color(0xFF00BFFF), // Deep sky blue
-                      Color(0xFF1E90FF), // Dodger blue
-                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF1565C0), // Light Blue
+                      Color(0xFF0D47A1), // Medium Blue
+                      Color(0xFF0A2472), // Deep Blue
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xFF00BFFF).withOpacity(0.5),
-                      blurRadius: 10,
-                      offset: Offset(0, 5),
+                ),
+              ),
+              title: SizedBox(
+                height: 50,
+                child: Image.asset(
+                  'assets/logo.png',
+                  fit: BoxFit.contain,
+                  width: 100, // Add explicit width
+                  height: 50, // Match the SizedBox height
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback if logo doesn't load
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: EdgeInsets.all(8),
+                          child: Icon(Icons.gamepad, color: Colors.black, size: 20),
+                        ),
+                        Text(
+                          'GAME',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              centerTitle: false,
+              actions: [
+                Container(
+                  margin: EdgeInsets.only(right: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF4A3B5C),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.account_balance_wallet,
+                        color: Colors.amber,
+                        size: 16,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        '₹28.71',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Stack(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.notifications, color: Colors.white),
+                      onPressed: () {},
+                    ),
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      'WIN ₹20,000',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                CircleAvatar(
+                  radius: 16,
+                  backgroundColor: Colors.amber,
+                  child: Icon(Icons.person, color: Colors.black, size: 20),
+                ),
+                SizedBox(width: 16),
+              ],
+            ),
+            body: SingleChildScrollView(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // GAME Logo Section
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 24),
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF00FFFF), // Cyan (neon)
+                            Color(0xFF00BFFF), // Deep sky blue
+                            Color(0xFF1E90FF), // Dodger blue
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFF00BFFF).withOpacity(0.6),
+                            blurRadius: 15,
+                            offset: Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          // Logo Image
+                          Container(
+                            height: 120,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.asset(
+                                'assets/logo.png', // Replace with your logo file name
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) {
+                                  // Fallback if image doesn't load
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.cyan,
+                                          Colors.amber,
+                                          Colors.pink,
+                                          Colors.cyan,
+                                        ],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                        color: Colors.white,
+                                        width: 3,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'FUL2WIN',
+                                        style: TextStyle(
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12),
+                          // Stars decoration
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                              5,
+                              (index) => Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 2),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Join tournament now!',
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
+                  // Trending Section
+                  _buildSectionHeader('🔥 TRENDING', Icons.trending_up),
+                  SizedBox(height: 12),
+                  _buildGameGrid(trendingGames),
+
+                  SizedBox(height: 24),
+
+                  // Snakes & Ladders Section
+                  _buildSectionHeader('🐍 MULTIPLAYER GAMES', Icons.gamepad),
+                  SizedBox(height: 12),
+                  _buildGameGrid(snakesLadders),
+
+                  SizedBox(height: 24),
+
+                  // Popular Section
+                  _buildSectionHeader('⭐ POPULAR GAMES', Icons.star),
+                  SizedBox(height: 12),
+                  _buildGameGrid(popularGames),
+
+                  SizedBox(height: 24),
+
+                  // Promotion Banner
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF6200EA), // Deep Purple
+                          Color(0xFF304FFE), // Indigo
+                          Color(0xFF2962FF), // Blue
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFF304FFE).withOpacity(0.5),
+                          blurRadius: 15,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 12),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style:
-                          ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 12,
-                            ),
-                          ).copyWith(
-                            backgroundColor: WidgetStateProperty.all(
-                              Colors.transparent,
-                            ),
-                          ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.amber, Colors.orange],
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        child: Text(
-                          'PLAY NOW',
+                    child: Column(
+                      children: [
+                        Text(
+                          'WIN ₹20,000',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Join tournament now!',
+                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                        ),
+                        SizedBox(height: 12),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style:
+                              ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 12,
+                                ),
+                              ).copyWith(
+                                backgroundColor: WidgetStateProperty.all(
+                                  Colors.transparent,
+                                ),
+                              ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.amber, Colors.orange],
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            child: Text(
+                              'PLAY NOW',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
+                ],
+              ),
+            ),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF1565C0), // Light Blue
+                    Color(0xFF0D47A1), // Medium Blue
+                    Color(0xFF0A2472), // Deep Blue
                   ],
                 ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF1565C0).withOpacity(0.3),
+                    blurRadius: 15,
+                    offset: Offset(0, -2),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF0A1A35), // Dark blue
-                Color(0xFF0F2A4A), // Medium dark blue
-              ],
+              child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                selectedItemColor: Colors.amber, // Changed to amber (yellow)
+                unselectedItemColor: Colors.white70,
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+                selectedFontSize: 10,
+                unselectedFontSize: 10,
+                items: [
+                  BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.sports_esports),
+                    label: 'Games',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.emoji_events),
+                    label: 'Tournaments',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.people),
+                    label: 'Community',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.account_balance_wallet),
+                    label: 'Wallet',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profile',
+                  ),
+                ],
+              ),
             ),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                blurRadius: 10,
-                offset: Offset(0, -2),
-              ),
-            ],
           ),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            selectedItemColor: Color(0xFFFFD54F), // Amber accent
-            unselectedItemColor: Colors.white60,
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-            selectedFontSize: 10,
-            unselectedFontSize: 10,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.sports_esports),
-                label: 'Games',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.emoji_events),
-                label: 'Tournaments',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.people),
-                label: 'Community',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_balance_wallet),
-                label: 'Wallet',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Profile',
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
@@ -456,13 +472,21 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSectionHeader(String title, IconData icon) {
     return Row(
       children: [
-        Icon(icon, color: Color(0xFF42A5F5), size: 20), // Bright blue
+        Image.asset(
+          title.contains('TRENDING')
+              ? 'assets/orange-star.png'
+              : title.contains('POPULAR')
+              ? 'assets/blue-star.png'
+              : 'assets/trophy.png',
+          width: 24,
+          height: 24,
+        ),
         SizedBox(width: 8),
         Text(
           title,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -501,7 +525,7 @@ class _HomePageState extends State<HomePage> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFF0F2A4A),
+          color: Color(0xFF1A237E),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: Color(0xFF42A5F5).withOpacity(0.5),
@@ -543,6 +567,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
+              ),
+              Positioned(
+                top: 4,
+                right: 4,
+                child: Image.asset(
+                  'assets/yellow-star.png',
+                  width: 20,
+                  height: 20,
+                ),
               ),
             ],
           ),
@@ -592,4 +625,30 @@ class GameItem {
   final Color color;
 
   GameItem(this.name, this.imagePath, this.color);
+}
+
+class StarBackgroundPainter extends CustomPainter {
+  final Color starColor;
+
+  StarBackgroundPainter({this.starColor = const Color(0x0DFFFFFF)});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final random = Random(42);
+    final paint = Paint()
+      ..color = starColor
+      ..style = PaintingStyle.fill;
+
+    // Draw more stars but with lower opacity
+    for (int i = 0; i < 30; i++) {
+      double x = random.nextDouble() * size.width;
+      double y = random.nextDouble() * size.height;
+      double starSize = random.nextDouble() * 15 + 5; // Smaller stars (5-20)
+
+      canvas.drawCircle(Offset(x, y), starSize / 2, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
