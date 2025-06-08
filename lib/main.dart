@@ -13,8 +13,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'GAME',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.transparent,
+        fontFamily: 'Roboto',
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: Colors.white),
+          bodyLarge: TextStyle(color: Colors.white),
+          titleMedium: TextStyle(color: Colors.white),
+          titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       home: HomePage(),
       debugShowCheckedModeBanner: false,
@@ -64,9 +71,9 @@ class _HomePageState extends State<HomePage> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF6A1B9A), // Deep purple
-            Color(0xFF4A148C), // Darker purple
-            Color(0xFF2A1B3D), // Very dark purple
+            Color(0xFF0A1A35), // Dark blue
+            Color(0xFF0F2A4A), // Medium dark blue
+            Color(0xFF0A1A35), // Dark blue
           ],
           stops: [0.0, 0.5, 1.0],
         ),
@@ -79,9 +86,12 @@ class _HomePageState extends State<HomePage> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xFF8E24AA), Color(0xFF6A1B9A)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF0A1A35), // Dark blue
+                  Color(0xFF0F2A4A), // Medium dark blue
+                ],
               ),
             ),
           ),
@@ -117,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-          centerTitle: false, // Change this from true to false
+          centerTitle: false,
           actions: [
             Container(
               margin: EdgeInsets.only(right: 8),
@@ -187,9 +197,9 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Color(0xFF9C27B0),
-                        Color(0xFF673AB7),
-                        Color(0xFF3F51B5),
+                        Color(0xFF00FFFF), // Cyan (neon)
+                        Color(0xFF00BFFF), // Deep sky blue
+                        Color(0xFF1E90FF), // Dodger blue
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -197,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Color(0xFF9C27B0).withOpacity(0.4),
+                        color: Color(0xFF00BFFF).withOpacity(0.6),
                         blurRadius: 15,
                         offset: Offset(0, 8),
                       ),
@@ -315,9 +325,9 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color(0xFF9C27B0),
-                      Color(0xFF673AB7),
-                      Color(0xFF3F51B5),
+                      Color(0xFF00FFFF), // Cyan
+                      Color(0xFF00BFFF), // Deep sky blue
+                      Color(0xFF1E90FF), // Dodger blue
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -325,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xFF9C27B0).withOpacity(0.3),
+                      color: Color(0xFF00BFFF).withOpacity(0.5),
                       blurRadius: 10,
                       offset: Offset(0, 5),
                     ),
@@ -396,7 +406,10 @@ class _HomePageState extends State<HomePage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xFF4A148C), Color(0xFF2A1B3D)],
+              colors: [
+                Color(0xFF0A1A35), // Dark blue
+                Color(0xFF0F2A4A), // Medium dark blue
+              ],
             ),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
@@ -414,7 +427,7 @@ class _HomePageState extends State<HomePage> {
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            selectedItemColor: Colors.amber,
+            selectedItemColor: Color(0xFFFFD54F), // Amber accent
             unselectedItemColor: Colors.white60,
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
@@ -452,7 +465,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSectionHeader(String title, IconData icon) {
     return Row(
       children: [
-        Icon(icon, color: Colors.amber, size: 20),
+        Icon(icon, color: Color(0xFF42A5F5), size: 20), // Bright blue
         SizedBox(width: 8),
         Text(
           title,
@@ -474,7 +487,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisCount: 3,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
-        childAspectRatio: 0.8,
+        childAspectRatio: 1.0, // Make cells square
       ),
       itemCount: games.length,
       itemBuilder: (context, index) {
@@ -497,55 +510,68 @@ class _HomePageState extends State<HomePage> {
       },
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [game.color.withOpacity(0.8), game.color.withOpacity(0.6)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Color(0xFF0F2A4A),
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: game.color.withOpacity(0.3),
-              blurRadius: 8,
-              offset: Offset(0, 4),
-            ),
-          ],
+          border: Border.all(
+            color: Color(0xFF42A5F5).withOpacity(0.5),
+            width: 1.5,
+          ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(
-                _getGameIcon(game.name),
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
-            SizedBox(height: 8),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4),
-              child: Text(
-                game.name,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: FutureBuilder<bool>(
+            future: _checkImageExists(game.imagePath),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data == true) {
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Image.asset(
+                      game.imagePath,
+                      width: constraints.maxWidth,
+                      height: constraints.maxHeight,
+                      fit: BoxFit.fill,
+                    );
+                  },
+                );
+              } else {
+                return Container(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        _getGameIcon(game.name),
+                        color: game.color,
+                        size: 32,
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        game.name,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
         ),
       ),
     );
+  }
+
+  Future<bool> _checkImageExists(String imagePath) async {
+    try {
+      await rootBundle.load(imagePath);
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   IconData _getGameIcon(String gameName) {

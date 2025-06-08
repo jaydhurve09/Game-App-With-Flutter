@@ -60,3 +60,5 @@ flutter:
   assets:
     - assets/
     - assets/logo.jpg
+    # - assets/logo.png
+    - assets/rummy.png
